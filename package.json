@@ -5,7 +5,9 @@
 	"license": "MIT",
 	"scripts": {
 		"dev": "webpack-dev-server --mode development --hot",
-		"build": "webpack --mode production"
+		"build": "webpack --mode production",
+		"format": "prettier --write .",
+		"format:check": "prettier --check ."
 	},
 	"dependencies": {
 		"react": "^16.13.1",
