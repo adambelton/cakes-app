@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { CakesList } from './components/cakes-list';
 
 const root = document.getElementById('root');
 
 const App = () => {
-	return <h1>I'm a scaffold for a cakes app!</h1>;
+	return <CakesList />;
 };
 
 ReactDOM.render(<App />, root);
