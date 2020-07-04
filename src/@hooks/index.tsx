@@ -27,27 +27,37 @@ export const useCats = () => {
 	const getRandomCat = async (callback: (cat: IRandomCat) => void) => {
 		try {
 			const result = await request.get<IRandomCat[]>('/images/search');
-			console.log({ result });
 			callback(result.data[0]);
 		} catch (error) {
 			console.log({ error });
 		}
 	};
 
-	const setFavourite = (imageId: string) => {
+	const setFavourite = (imageId: string) =>
+		new Promise((resolve, reject) => {
+			try {
+				request.post('/favourites', {
+					image_id: imageId,
+				});
+				resolve();
+			} catch (error) {
+				console.log({ error });
+				reject();
+			}
+		});
+
+	const getFavourites = async (callback: (favourites: IFavouriteCat[]) => void) => {
 		try {
-			request.post('/favourites', {
-				image_id: imageId,
-			});
+			const result = await request.get('/favourites');
+			callback(result.data);
 		} catch (error) {
 			console.log({ error });
 		}
 	};
 
-	const getFavourites = async (callback: (favourites: IFavouriteCat[]) => void) => {
+	const getFavourite = async (favouriteId: string, callback: (favouriteId: IFavouriteCat) => void) => {
 		try {
-			const result = await request.get('/favourites');
-			console.log({ result });
+			const result = await request.get(`/favourites/${favouriteId}`);
 			callback(result.data);
 		} catch (error) {
 			console.log({ error });
@@ -62,10 +72,24 @@ export const useCats = () => {
 		}
 	};
 
+	const createNewCat = (data: FormData) =>
+		new Promise(async (resolve, reject) => {
+			try {
+				const response = await request.post<IRandomCat>('/images/upload', data);
+				await setFavourite(response.data.id);
+				resolve();
+			} catch (error) {
+				console.log({ error });
+				reject();
+			}
+		});
+
 	return {
 		getRandomCat,
 		setFavourite,
 		getFavourites,
 		removeFavourite,
+		createNewCat,
+		getFavourite,
 	};
 };

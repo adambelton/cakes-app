@@ -1,4 +1,5 @@
-import { CatPreview, PreviewSize } from '@components/cat-preview';
+import { CatPreview } from '@components/cat-preview';
+import { PreviewSize } from '@components/types';
 import { IRandomCat, useCats } from '@hooks';
 import React from 'react';
 

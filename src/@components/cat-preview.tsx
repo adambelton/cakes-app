@@ -2,14 +2,11 @@ import { Absolute, Image, Relative } from '@ui';
 import React from 'react';
 import { FiThumbsDown, FiThumbsUp } from 'react-icons/fi';
 
+import { PreviewSize } from './types';
+
 enum HoverIcon {
 	THUMBS_UP,
 	THUMBS_DOWN,
-}
-
-export enum PreviewSize {
-	LARGE = '300px',
-	SMALL = '150px',
 }
 
 interface ICatPreview {
@@ -17,13 +14,14 @@ interface ICatPreview {
 	size: PreviewSize;
 	onThumbsUpClick?: () => void;
 	onThumbsDownClick?: () => void;
+	onImageClick?: () => void;
 }
 
-export const CatPreview = ({ onThumbsDownClick, onThumbsUpClick, url, size }: ICatPreview) => {
+export const CatPreview = ({ onImageClick, onThumbsDownClick, onThumbsUpClick, url, size }: ICatPreview) => {
 	const [hoverIcon, setHoverIcon] = React.useState<null | HoverIcon>(null);
 	return (
 		<Relative>
-			<Image url={url} size={size} />
+			<Image isClickable={!!onImageClick} url={url} size={size} onClick={onImageClick} />
 			{onThumbsUpClick && (
 				<Absolute
 					onMouseEnter={() => setHoverIcon(HoverIcon.THUMBS_UP)}

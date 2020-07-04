@@ -1,11 +1,13 @@
-import { CatPreview, PreviewSize } from '@components/cat-preview';
+import { CatPreview } from '@components/cat-preview';
+import { PreviewSize } from '@components/types';
 import { IFavouriteCat, useCats } from '@hooks';
 import { Column, Grid } from '@ui';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 export const Favourites = () => {
 	const { getFavourites, removeFavourite } = useCats();
+	const history = useHistory();
 	const [favouriteCats, setFavouriteCats] = React.useState<null | IFavouriteCat[]>(null);
 
 	React.useEffect(() => {
@@ -16,7 +18,7 @@ export const Favourites = () => {
 		<div>Loading favourite cats...</div>
 	) : !favouriteCats.length ? (
 		<Column>
-			<div>{`Why don't you like cats you monster?`}</div>
+			<div>{`What, you don't like cats? Are you a monster??`}</div>
 			<Link to="/">Vote for more cats</Link>
 		</Column>
 	) : (
@@ -30,6 +32,9 @@ export const Favourites = () => {
 						onThumbsDownClick={() => {
 							removeFavourite(favourite.id);
 							setFavouriteCats(favouriteCats.filter((cat) => cat.id !== favourite.id));
+						}}
+						onImageClick={() => {
+							history.push(`/favourites/${favourite.id}`);
 						}}
 					/>
 				);

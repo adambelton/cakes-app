@@ -1,5 +1,146 @@
+import { CatPreview } from '@components/cat-preview';
+import { PreviewSize } from '@components/types';
+import { IFavouriteCat, useCats } from '@hooks';
+import { Column } from '@ui';
 import React from 'react';
+import { useParams } from 'react-router-dom';
+
+enum FavouriteRating {
+	ONE = '1',
+	TWO = '2',
+	THREE = '3',
+	FIVE = '5',
+	EIGHT = '8',
+	THIRTEEN = '13',
+}
+
+interface IFavouriteData {
+	about: string;
+	rating?: FavouriteRating;
+}
+
+const STORED_FAVOURITE_DATA_KEY = 'storedFavouriteData';
+
+const getFavouriteDataFromLocalStorage = (favouriteId?: number) => {
+	const storedFavouriteDataString = localStorage.getItem(STORED_FAVOURITE_DATA_KEY);
+	const storedFavouriteDataParsed = storedFavouriteDataString && JSON.parse(storedFavouriteDataString);
+
+	if (favouriteId) {
+		return storedFavouriteDataParsed && storedFavouriteDataParsed[favouriteId];
+	}
+
+	return storedFavouriteDataParsed;
+};
+
+const mergeFavouriteDataIntoLocalStorage = (favouriteId: string, favouriteData: IFavouriteData) => {
+	const storedFavouriteDataAll = getFavouriteDataFromLocalStorage() || {};
+
+	localStorage.setItem(
+		STORED_FAVOURITE_DATA_KEY,
+		JSON.stringify({
+			...storedFavouriteDataAll,
+			[favouriteId]: favouriteData,
+		})
+	);
+};
 
 export const Detail = () => {
-	return <React.Fragment />;
+	const { getFavourite } = useCats();
+	const { favouriteId } = useParams();
+	const [favouriteData, setFavouriteData] = React.useState<null | IFavouriteData>(null);
+	const [favouriteCat, setfavouriteCat] = React.useState<null | IFavouriteCat>(null);
+
+	React.useEffect(() => {
+		console.log({ favouriteData });
+	}, [favouriteData]);
+
+	React.useEffect(() => {
+		const storedFavouriteData = getFavouriteDataFromLocalStorage(favouriteId);
+
+		if (storedFavouriteData) {
+			setFavouriteData(storedFavouriteData);
+		} else {
+			setFavouriteData({ about: '' });
+		}
+
+		getFavourite(favouriteId, setfavouriteCat);
+	}, []);
+
+	React.useEffect(() => {
+		return () => {
+			mergeFavouriteDataIntoLocalStorage(favouriteId, favouriteData);
+		};
+	}, [favouriteData]);
+
+	const handleUpdateFavouriteData = (data: Partial<IFavouriteData>) => {
+		setFavouriteData({
+			...favouriteData,
+			...data,
+		});
+	};
+
+	return !favouriteCat ? (
+		<div>Loading favourite cat...</div>
+	) : (
+		<Column>
+			<CatPreview url={favouriteCat.image.url} size={PreviewSize.SMALL} />
+			<h1>About this cat:</h1>
+			<textarea
+				style={{ height: 200, width: 300 }}
+				value={favouriteData.about}
+				onChange={(event) => handleUpdateFavouriteData({ about: event.currentTarget.value })}
+			/>
+			<h1>Rating</h1>
+			<div style={{ display: 'flex' }}>
+				<input
+					type="radio"
+					id={FavouriteRating.ONE}
+					name="rating"
+					checked={favouriteData.rating === FavouriteRating.ONE}
+					onChange={() => handleUpdateFavouriteData({ rating: FavouriteRating.ONE })}
+				/>
+				<label htmlFor={FavouriteRating.ONE}>{FavouriteRating.ONE}</label>
+				<input
+					type="radio"
+					id={FavouriteRating.TWO}
+					name="rating"
+					checked={favouriteData.rating === FavouriteRating.TWO}
+					onChange={() => handleUpdateFavouriteData({ rating: FavouriteRating.TWO })}
+				/>
+				<label htmlFor={FavouriteRating.TWO}>{FavouriteRating.TWO}</label>
+				<input
+					type="radio"
+					id={FavouriteRating.THREE}
+					name="rating"
+					checked={favouriteData.rating === FavouriteRating.THREE}
+					onChange={() => handleUpdateFavouriteData({ rating: FavouriteRating.THREE })}
+				/>
+				<label htmlFor={FavouriteRating.THREE}>{FavouriteRating.THREE}</label>
+				<input
+					type="radio"
+					id={FavouriteRating.FIVE}
+					name="rating"
+					checked={favouriteData.rating === FavouriteRating.FIVE}
+					onChange={() => handleUpdateFavouriteData({ rating: FavouriteRating.FIVE })}
+				/>
+				<label htmlFor={FavouriteRating.FIVE}>{FavouriteRating.FIVE}</label>
+				<input
+					type="radio"
+					id={FavouriteRating.EIGHT}
+					name="rating"
+					checked={favouriteData.rating === FavouriteRating.EIGHT}
+					onChange={() => handleUpdateFavouriteData({ rating: FavouriteRating.EIGHT })}
+				/>
+				<label htmlFor={FavouriteRating.EIGHT}>{FavouriteRating.EIGHT}</label>
+				<input
+					type="radio"
+					id={FavouriteRating.THIRTEEN}
+					name="rating"
+					checked={favouriteData.rating === FavouriteRating.THIRTEEN}
+					onChange={() => handleUpdateFavouriteData({ rating: FavouriteRating.THIRTEEN })}
+				/>
+				<label htmlFor={FavouriteRating.THIRTEEN}>{FavouriteRating.THIRTEEN}</label>
+			</div>
+		</Column>
+	);
 };

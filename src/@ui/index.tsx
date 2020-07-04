@@ -40,14 +40,22 @@ export const Container = styled.div`
 	margin-top: 20px;
 `;
 
-export const Image = styled.div<{ url: string; size: CSSProperties['height'] | CSSProperties['width'] }>`
+export const Image = styled.div<{
+	isClickable?: boolean;
+	url?: string;
+	size: CSSProperties['height'] | CSSProperties['width'];
+}>`
 	height: ${(props) => props.size};
 	width: ${(props) => props.size};
 	border-radius: 50%;
-	background: ${(props) => `url(${props.url})`};
+	background: ${(props) => `#CDCDCD url(${props.url})`};
 	background-position: center center;
 	background-size: cover;
 	margin-bottom: 50px;
+	&:hover {
+		opacity: ${(props) => (props.isClickable ? 0.6 : 1)};
+		cursor: ${(props) => (props.isClickable ? 'pointer' : 'auto')};
+	}
 `;
 
 export const Canvas = styled.div`
