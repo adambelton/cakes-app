@@ -11,6 +11,12 @@ module.exports = {
 	},
 	resolve: {
 		extensions: ['.js', '.jsx', '.ts', '.tsx'],
+		alias: {
+			'@components': path.resolve(__dirname, 'src/@components'),
+			'@hooks': path.resolve(__dirname, 'src/@hooks'),
+			'@pages': path.resolve(__dirname, 'src/@pages'),
+			'@ui': path.resolve(__dirname, 'src/@ui'),
+		},
 	},
 	module: {
 		rules: [
