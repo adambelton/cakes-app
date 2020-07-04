@@ -51,10 +51,6 @@ export const Detail = () => {
     const [favouriteCat, setfavouriteCat] = React.useState<null | IFavouriteCat>(null);
 
     React.useEffect(() => {
-        console.log({ favouriteData });
-    }, [favouriteData]);
-
-    React.useEffect(() => {
         const storedFavouriteData = getFavouriteDataFromLocalStorage(favouriteId);
 
         if (storedFavouriteData) {
