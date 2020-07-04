@@ -1,4 +1,4 @@
-import { Absolute, Column, Image, Relative } from '@ui';
+import { Absolute, Image, Relative } from '@ui';
 import React from 'react';
 import { FiThumbsDown, FiThumbsUp } from 'react-icons/fi';
 
@@ -7,18 +7,24 @@ enum HoverIcon {
 	THUMBS_DOWN,
 }
 
-interface ICatPreview {
-	url: string;
-	onThumbsUpClick: () => void;
-	onThumbsDownClick: () => void;
+export enum PreviewSize {
+	LARGE = '300px',
+	SMALL = '150px',
 }
 
-export const CatPreview = ({ onThumbsDownClick, onThumbsUpClick, url }: ICatPreview) => {
+interface ICatPreview {
+	url: string;
+	size: PreviewSize;
+	onThumbsUpClick?: () => void;
+	onThumbsDownClick?: () => void;
+}
+
+export const CatPreview = ({ onThumbsDownClick, onThumbsUpClick, url, size }: ICatPreview) => {
 	const [hoverIcon, setHoverIcon] = React.useState<null | HoverIcon>(null);
 	return (
-		<Column>
-			<Relative>
-				<Image url={url} />
+		<Relative>
+			<Image url={url} size={size} />
+			{onThumbsUpClick && (
 				<Absolute
 					onMouseEnter={() => setHoverIcon(HoverIcon.THUMBS_UP)}
 					onMouseLeave={() => setHoverIcon(null)}
@@ -28,6 +34,8 @@ export const CatPreview = ({ onThumbsDownClick, onThumbsUpClick, url }: ICatPrev
 				>
 					<FiThumbsUp color={`rgba(8, 185, 8, ${hoverIcon === HoverIcon.THUMBS_UP ? 0.6 : 1})`} size={50} />
 				</Absolute>
+			)}
+			{onThumbsDownClick && (
 				<Absolute
 					onMouseEnter={() => setHoverIcon(HoverIcon.THUMBS_DOWN)}
 					onMouseLeave={() => setHoverIcon(null)}
@@ -40,7 +48,7 @@ export const CatPreview = ({ onThumbsDownClick, onThumbsUpClick, url }: ICatPrev
 						size={50}
 					/>
 				</Absolute>
-			</Relative>
-		</Column>
+			)}
+		</Relative>
 	);
 };

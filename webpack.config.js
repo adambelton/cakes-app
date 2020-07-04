@@ -8,6 +8,7 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, 'build'),
 		filename: 'bundle.js',
+		publicPath: '/',
 	},
 	resolve: {
 		extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -30,6 +31,9 @@ module.exports = {
 				loader: 'source-map-loader',
 			},
 		],
+	},
+	devServer: {
+		historyApiFallback: true,
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
