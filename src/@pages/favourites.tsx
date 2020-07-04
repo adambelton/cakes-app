@@ -14,14 +14,20 @@ export const Favourites = () => {
 		getFavourites(setFavouriteCats);
 	}, []);
 
-	return !favouriteCats ? (
-		<div>Loading favourite cats...</div>
-	) : !favouriteCats.length ? (
-		<Column>
-			<div>{`What, you don't like cats? Are you a monster??`}</div>
-			<Link to="/">Vote for more cats</Link>
-		</Column>
-	) : (
+	if (!favouriteCats) {
+		return <div>Loading favourite cats...</div>;
+	}
+
+	if (!favouriteCats.length) {
+		return (
+			<Column>
+				<div>{`What, you don't like cats? Are you a monster??`}</div>
+				<Link to="/">Vote for more cats</Link>
+			</Column>
+		);
+	}
+
+	return (
 		<Grid>
 			{favouriteCats.map((favourite) => {
 				return (

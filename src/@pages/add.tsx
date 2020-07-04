@@ -1,6 +1,6 @@
 import { PreviewSize } from '@components/types';
 import { useCats } from '@hooks';
-import { Absolute, Image, Relative } from '@ui';
+import { Absolute, Image, Relative, Row } from '@ui';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -27,7 +27,7 @@ export const Add = () => {
 		<Relative>
 			<Image url={fileToUpload && fileToUpload.preview} size={PreviewSize.LARGE} />
 			<Absolute bottom={0}>
-				<div style={{ display: 'flex' }}>
+				<Row>
 					<input
 						type="file"
 						onChange={(event) =>
@@ -43,7 +43,7 @@ export const Add = () => {
 					>
 						{uploadInProcess ? 'Uploading' : 'Submit'}
 					</button>
-				</div>
+				</Row>
 			</Absolute>
 		</Relative>
 	);

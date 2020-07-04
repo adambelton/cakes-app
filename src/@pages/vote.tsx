@@ -11,9 +11,11 @@ export const Vote = () => {
 		getRandomCat(setRandomCat);
 	}, []);
 
-	return !randomCat ? (
-		<div>Loading random cat...</div>
-	) : (
+	if (!randomCat) {
+		return <div>Loading random cat...</div>;
+	}
+
+	return (
 		<CatPreview
 			url={randomCat.url}
 			size={PreviewSize.LARGE}

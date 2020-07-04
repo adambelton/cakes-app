@@ -19,6 +19,7 @@ interface ICatPreview {
 
 export const CatPreview = ({ onImageClick, onThumbsDownClick, onThumbsUpClick, url, size }: ICatPreview) => {
 	const [hoverIcon, setHoverIcon] = React.useState<null | HoverIcon>(null);
+
 	return (
 		<Relative>
 			<Image isClickable={!!onImageClick} url={url} size={size} onClick={onImageClick} />

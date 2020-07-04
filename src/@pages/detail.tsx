@@ -1,7 +1,7 @@
 import { CatPreview } from '@components/cat-preview';
 import { PreviewSize } from '@components/types';
 import { IFavouriteCat, useCats } from '@hooks';
-import { Column } from '@ui';
+import { Column, Row, TextArea } from '@ui';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -79,19 +79,20 @@ export const Detail = () => {
 		});
 	};
 
-	return !favouriteCat ? (
-		<div>Loading favourite cat...</div>
-	) : (
+	if (!favouriteCat) {
+		return <div>Loading favourite cat...</div>;
+	}
+
+	return (
 		<Column>
 			<CatPreview url={favouriteCat.image.url} size={PreviewSize.SMALL} />
-			<h1>About this cat:</h1>
-			<textarea
-				style={{ height: 200, width: 300 }}
+			<h2>About this cat:</h2>
+			<TextArea
 				value={favouriteData.about}
 				onChange={(event) => handleUpdateFavouriteData({ about: event.currentTarget.value })}
 			/>
-			<h1>Rating</h1>
-			<div style={{ display: 'flex' }}>
+			<h2>Rating</h2>
+			<Row>
 				<input
 					type="radio"
 					id={FavouriteRating.ONE}
@@ -140,7 +141,7 @@ export const Detail = () => {
 					onChange={() => handleUpdateFavouriteData({ rating: FavouriteRating.THIRTEEN })}
 				/>
 				<label htmlFor={FavouriteRating.THIRTEEN}>{FavouriteRating.THIRTEEN}</label>
-			</div>
+			</Row>
 		</Column>
 	);
 };

@@ -68,3 +68,12 @@ export const Canvas = styled.div`
 	justify-content: center;
 	align-items: center;
 `;
+
+export const TextArea = styled.textarea`
+	height: 200px;
+	width: 300px;
+`;
+
+export const Row = styled.div`
+	display: flex;
+`;
