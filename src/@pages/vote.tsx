@@ -3,7 +3,7 @@ import { PreviewSize } from '@components/types';
 import { IRandomCat, useCats } from '@hooks';
 import React from 'react';
 
-export const Vote = () => {
+export const Vote: React.FC = () => {
     const { getRandomCat, setFavourite } = useCats();
     const [randomCat, setRandomCat] = React.useState<null | IRandomCat>(null);
 

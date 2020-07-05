@@ -32,14 +32,6 @@ export const Grid = styled.div`
     grid-gap: 20px;
 `;
 
-export const Container = styled.div`
-    height: 100%;
-    display: flex;
-    align-items: flex-start;
-    max-width: 800px;
-    margin-top: 20px;
-`;
-
 export const Image = styled.div<{
     isClickable?: boolean;
     url?: string;

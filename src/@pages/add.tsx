@@ -9,7 +9,7 @@ interface IFileToUpload {
     data: File;
 }
 
-export const Add = () => {
+export const Add: React.FC = () => {
     const { createNewCat } = useCats();
     const history = useHistory();
     const [fileToUpload, setFileToUpload] = React.useState<null | IFileToUpload>(null);

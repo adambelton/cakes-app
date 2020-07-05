@@ -5,7 +5,7 @@ import { Column, Grid } from '@ui';
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-export const Favourites = () => {
+export const Favourites: React.FC = () => {
     const { getFavourites, removeFavourite } = useCats();
     const history = useHistory();
     const [favouriteCats, setFavouriteCats] = React.useState<null | IFavouriteCat[]>(null);

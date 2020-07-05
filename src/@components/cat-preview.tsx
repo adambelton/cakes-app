@@ -17,7 +17,7 @@ interface ICatPreview {
     onImageClick?: () => void;
 }
 
-export const CatPreview = ({ onImageClick, onThumbsDownClick, onThumbsUpClick, url, size }: ICatPreview) => {
+export const CatPreview: React.FC<ICatPreview> = ({ onImageClick, onThumbsDownClick, onThumbsUpClick, url, size }) => {
     const [hoverIcon, setHoverIcon] = React.useState<null | HoverIcon>(null);
 
     return (
