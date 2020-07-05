@@ -17,6 +17,13 @@ export const Absolute = styled.div<{
     left: ${(props) => props.left};
 `;
 
+export const Clickable = styled.div`
+    &:hover {
+        opacity: 0.6;
+        cursor: pointer;
+    }
+`;
+
 export const Column = styled.div<{ alignItems?: CSSProperties['alignItems'] }>`
     display: flex;
     flex-direction: column;
@@ -44,10 +51,6 @@ export const Image = styled.div<{
     background-position: center center;
     background-size: cover;
     margin-bottom: 50px;
-    &:hover {
-        opacity: ${(props) => (props.isClickable ? 0.6 : 1)};
-        cursor: ${(props) => (props.isClickable ? 'pointer' : 'auto')};
-    }
 `;
 
 export const Canvas = styled.div`
