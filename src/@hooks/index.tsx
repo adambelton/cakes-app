@@ -10,7 +10,7 @@ const request = axios.create({
     },
 });
 
-export interface IRandomCat {
+export interface IImageCat {
     id: string;
     url: string;
 }
@@ -24,9 +24,9 @@ export interface IFavouriteCat {
 }
 
 export const useCats = () => {
-    const getRandomCat = async (callback: (cat: IRandomCat) => void) => {
+    const getRandomCat = async (callback: (cat: IImageCat) => void) => {
         try {
-            const result = await request.get<IRandomCat[]>('/images/search');
+            const result = await request.get<IImageCat[]>('/images/search');
             callback(result.data[0]);
         } catch (error) {
             console.log({ error });
@@ -75,7 +75,7 @@ export const useCats = () => {
     const createNewCat = (data: FormData) =>
         new Promise(async (resolve, reject) => {
             try {
-                const response = await request.post<IRandomCat>('/images/upload', data);
+                const response = await request.post<IImageCat>('/images/upload', data);
                 await setFavourite(response.data.id);
                 resolve();
             } catch (error) {
