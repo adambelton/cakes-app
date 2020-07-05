@@ -89,54 +89,71 @@ export const Detail: React.FC = () => {
             />
             <h2>Rating</h2>
             <Row>
-                <input
-                    type="radio"
-                    id={FavouriteRating.ONE}
-                    name="rating"
-                    checked={favouriteData.rating === FavouriteRating.ONE}
-                    onChange={() => handleUpdateFavouriteData({ rating: FavouriteRating.ONE })}
-                />
-                <label htmlFor={FavouriteRating.ONE}>{FavouriteRating.ONE}</label>
-                <input
-                    type="radio"
-                    id={FavouriteRating.TWO}
-                    name="rating"
-                    checked={favouriteData.rating === FavouriteRating.TWO}
-                    onChange={() => handleUpdateFavouriteData({ rating: FavouriteRating.TWO })}
-                />
-                <label htmlFor={FavouriteRating.TWO}>{FavouriteRating.TWO}</label>
-                <input
-                    type="radio"
-                    id={FavouriteRating.THREE}
-                    name="rating"
-                    checked={favouriteData.rating === FavouriteRating.THREE}
-                    onChange={() => handleUpdateFavouriteData({ rating: FavouriteRating.THREE })}
-                />
-                <label htmlFor={FavouriteRating.THREE}>{FavouriteRating.THREE}</label>
-                <input
-                    type="radio"
-                    id={FavouriteRating.FIVE}
-                    name="rating"
-                    checked={favouriteData.rating === FavouriteRating.FIVE}
-                    onChange={() => handleUpdateFavouriteData({ rating: FavouriteRating.FIVE })}
-                />
-                <label htmlFor={FavouriteRating.FIVE}>{FavouriteRating.FIVE}</label>
-                <input
-                    type="radio"
-                    id={FavouriteRating.EIGHT}
-                    name="rating"
-                    checked={favouriteData.rating === FavouriteRating.EIGHT}
-                    onChange={() => handleUpdateFavouriteData({ rating: FavouriteRating.EIGHT })}
-                />
-                <label htmlFor={FavouriteRating.EIGHT}>{FavouriteRating.EIGHT}</label>
-                <input
-                    type="radio"
-                    id={FavouriteRating.THIRTEEN}
-                    name="rating"
-                    checked={favouriteData.rating === FavouriteRating.THIRTEEN}
-                    onChange={() => handleUpdateFavouriteData({ rating: FavouriteRating.THIRTEEN })}
-                />
-                <label htmlFor={FavouriteRating.THIRTEEN}>{FavouriteRating.THIRTEEN}</label>
+                <label>
+                    <input
+                        type="radio"
+                        id={FavouriteRating.ONE}
+                        name="rating"
+                        checked={favouriteData.rating === FavouriteRating.ONE}
+                        onChange={() => handleUpdateFavouriteData({ rating: FavouriteRating.ONE })}
+                    />
+                    {FavouriteRating.ONE}
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        id={FavouriteRating.TWO}
+                        name="rating"
+                        checked={favouriteData.rating === FavouriteRating.TWO}
+                        onChange={() => handleUpdateFavouriteData({ rating: FavouriteRating.TWO })}
+                    />
+                    {FavouriteRating.TWO}
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        id={FavouriteRating.THREE}
+                        name="rating"
+                        checked={favouriteData.rating === FavouriteRating.THREE}
+                        onChange={() => handleUpdateFavouriteData({ rating: FavouriteRating.THREE })}
+                    />
+                    {FavouriteRating.THREE}
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        id={FavouriteRating.FIVE}
+                        name="rating"
+                        checked={favouriteData.rating === FavouriteRating.FIVE}
+                        onChange={() => handleUpdateFavouriteData({ rating: FavouriteRating.FIVE })}
+                    />
+                    {FavouriteRating.FIVE}
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        id={FavouriteRating.EIGHT}
+                        name="rating"
+                        checked={favouriteData.rating === FavouriteRating.EIGHT}
+                        onChange={() => handleUpdateFavouriteData({ rating: FavouriteRating.EIGHT })}
+                    />
+                    {FavouriteRating.EIGHT}
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        id={FavouriteRating.THIRTEEN}
+                        name="rating"
+                        checked={favouriteData.rating === FavouriteRating.THIRTEEN}
+                        onChange={() => handleUpdateFavouriteData({ rating: FavouriteRating.THIRTEEN })}
+                    />
+                    {FavouriteRating.THIRTEEN}
+                </label>
             </Row>
         </Column>
     );
