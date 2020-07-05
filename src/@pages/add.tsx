@@ -15,31 +15,36 @@ export const Add: React.FC = () => {
     const [fileToUpload, setFileToUpload] = React.useState<null | IFileToUpload>(null);
     const [uploadInProcess, setUploadInProcess] = React.useState(false);
 
-    const saveNewFavouriteCat = async () => {
-        const data = new FormData();
-        data.append('file', fileToUpload.data);
-        setUploadInProcess(true);
-        await createNewCat(data);
-        history.push('/favourites');
+    const handleSaveNewFavouriteCat = async () => {
+        if (fileToUpload) {
+            const data = new FormData();
+            data.append('file', fileToUpload.data);
+            setUploadInProcess(true);
+            await createNewCat(data);
+            history.push('/favourites');
+        }
+    };
+
+    const handleSetFileToUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { files } = event.currentTarget;
+
+        if (files) {
+            setFileToUpload({
+                preview: URL.createObjectURL(files[0]),
+                data: files[0],
+            });
+        }
     };
 
     return (
         <Relative>
-            <Image url={fileToUpload && fileToUpload.preview} size={PreviewSize.LARGE} />
+            <Image url={fileToUpload ? fileToUpload.preview : undefined} size={PreviewSize.LARGE} />
             <Absolute bottom={0}>
                 <Row>
-                    <input
-                        type="file"
-                        onChange={(event) =>
-                            setFileToUpload({
-                                preview: URL.createObjectURL(event.currentTarget.files[0]),
-                                data: event.currentTarget.files[0],
-                            })
-                        }
-                    />
+                    <input type="file" onChange={handleSetFileToUpload} />
                     <button
                         disabled={!fileToUpload || uploadInProcess}
-                        onClick={() => fileToUpload && saveNewFavouriteCat()}
+                        onClick={() => fileToUpload && handleSaveNewFavouriteCat()}
                     >
                         {uploadInProcess ? 'Uploading' : 'Submit'}
                     </button>

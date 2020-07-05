@@ -47,7 +47,7 @@ const mergeFavouriteDataIntoLocalStorage = (favouriteId: string, favouriteData: 
 export const Detail: React.FC = () => {
     const { getFavourite } = useCats();
     const { favouriteId } = useParams();
-    const [favouriteData, setFavouriteData] = React.useState<null | IFavouriteData>(null);
+    const [favouriteData, setFavouriteData] = React.useState<IFavouriteData>({ about: '' });
     const [favouriteCat, setfavouriteCat] = React.useState<null | IFavouriteCat>(null);
 
     React.useEffect(() => {
