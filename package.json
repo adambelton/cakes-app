@@ -8,6 +8,7 @@
         "build": "webpack --mode production",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
+        "tsc:check": "tsc --noEmit",
         "lint": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix"
     },
     "dependencies": {
